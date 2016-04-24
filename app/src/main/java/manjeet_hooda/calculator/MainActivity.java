@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import me.grantland.widget.AutofitTextView;
+
 public class MainActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
@@ -23,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView zero, one, two, three, four, five, six, seven, eight, nine, dot;
     TextView del, min, plus, div, mul, equals;
-    TextView result;
+    private AutofitTextView result, exp;
 
     double answer, num1, num2;
     boolean operator_pressed,dot_pressed;
@@ -42,7 +44,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        result = (TextView)findViewById(R.id.result);
+        result = (AutofitTextView) findViewById(R.id.result);
+        exp = (AutofitTextView) findViewById(R.id.exp);
+        result.setText("77777");
+        exp.setText("2398409");
         answer = num1 = num2 = 0;
         operator_pressed = equals_pressed = false;
         dot_pressed = false;

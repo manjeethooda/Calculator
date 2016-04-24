@@ -3,25 +3,53 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:autofit="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context=".MainActivity">
 
-    <TextView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
         android:layout_weight="1"
-        android:id="@+id/result"
-        android:textSize="@dimen/result_size"
-        android:gravity="bottom|right"
         android:elevation="10dp"
-        android:paddingBottom="20dp"
-        android:paddingRight="@dimen/line_gap"
         android:background="@color/white"
-        />
+        android:layout_height="0dp">
 
+
+        <me.grantland.widget.AutofitTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/exp"
+            android:singleLine="true"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:gravity="right"
+            android:maxLines="1"
+            android:background="@color/white"
+            android:textSize="50sp"
+            autofit:minTextSize="20sp"
+            />
+
+        <me.grantland.widget.AutofitTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/result"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:background="@color/white"
+            android:textSize="60sp"
+            autofit:minTextSize="30sp"
+            android:paddingTop="10dp"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:gravity="bottom|right"
+            android:paddingBottom="30dp"
+            />
+    </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
