@@ -3,11 +3,11 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!--   your app branding color for the app bar -->
-        <item name="colorPrimary">#597f2a</item>
+        <item name="colorPrimary">#444b4b</item>
         <!--   darker variant for the status bar and contextual app bars -->
-        <item name="colorPrimaryDark">#4f7125</item>
+        <item name="colorPrimaryDark">#444b4b</item>
         <!--   theme UI controls like checkboxes and text fields -->
-        <item name="colorAccent">#4f7215</item>
+        <item name="colorAccent">#444b4b</item>
         <!--   decreasing spacing and size of menu items -->
     </style>
 

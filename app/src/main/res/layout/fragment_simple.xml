@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    >
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:background="@color/gray"
+        android:layout_height="match_parent">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/eight"
+            android:textSize="@dimen/num_size"
+            android:textColor="@color/white"
+            android:id="@+id/button_eight"
+            android:background="?attr/selectableItemBackground" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textSize="@dimen/num_size"
+            android:textColor="@color/white"
+            android:text="@string/five"
+            android:id="@+id/button_five"
+            android:background="?attr/selectableItemBackground" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/two"
+            android:textColor="@color/white"
+            android:textSize="@dimen/num_size"
+            android:id="@+id/button_two"
+            android:background="?attr/selectableItemBackground" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:textSize="@dimen/num_size"
+            android:text="@string/zero"
+            android:id="@+id/button_zero"
+            android:background="?attr/selectableItemBackground" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:background="@color/gray"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:textSize="@dimen/num_size"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:text="@string/nine"
+            android:id="@+id/button_nine"
+            android:background="?attr/selectableItemBackground" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/six"
+            android:textSize="@dimen/num_size"
+            android:textColor="@color/white"
+            android:id="@+id/button_six"
+            android:background="?attr/selectableItemBackground" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/three"
+            android:textColor="@color/white"
+            android:textSize="@dimen/num_size"
+            android:id="@+id/button_three"
+            android:background="?attr/selectableItemBackground" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:textSize="@dimen/num_size"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:text="@string/equals"
+            android:id="@+id/button_equal"
+            android:background="?attr/selectableItemBackground" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:background="@color/light_gray"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:textSize="@dimen/fn_size"
+                android:textColor="@color/white"
+                android:layout_weight="1"
+                android:text="@string/del"
+                android:id="@+id/button_del"
+                android:background="?attr/selectableItemBackground" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:textSize="@dimen/fn_size"
+                android:text="@string/div"
+                android:id="@+id/button_div"
+                android:background="?attr/selectableItemBackground" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:textSize="@dimen/fn_size"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:text="@string/mul"
+                android:id="@+id/button_mul"
+                android:background="?attr/selectableItemBackground" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:text="@string/min"
+                android:textSize="@dimen/fn_size"
+                android:id="@+id/button_min"
+                android:background="?attr/selectableItemBackground" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:textSize="@dimen/fn_size"
+                android:textColor="@color/white"
+                android:layout_weight="1"
+                android:text="@string/plus"
+                android:id="@+id/button_plus"
+                android:background="?attr/selectableItemBackground" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@color/green"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
