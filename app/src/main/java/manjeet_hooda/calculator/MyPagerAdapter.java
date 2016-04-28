@@ -12,15 +12,17 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter {
     private fragment_simple mFragment_simple;
     private fragment_scientific mFragment_scientific;
     private int mNumOfTabs;
+    private MainActivity mainActivity;
 
     @Override
     public int getCount() {
         return mNumOfTabs;
     }
 
-    public MyPagerAdapter(FragmentManager fm, int NumOfTabs) {
+    public MyPagerAdapter(FragmentManager fm, int NumOfTabs, MainActivity mainActivity) {
         super(fm);
         this.mNumOfTabs = NumOfTabs;
+        this.mainActivity = mainActivity;
     }
 
     @Override
@@ -30,6 +32,7 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter {
                 if(mFragment_simple == null) {
                     mFragment_simple = new fragment_simple();
                 }
+                mFragment_simple.setupListener(mainActivity);
                 return mFragment_simple;
             case 1:
                 if (mFragment_scientific == null) {

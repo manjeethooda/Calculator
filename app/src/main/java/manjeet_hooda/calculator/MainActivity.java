@@ -1,7 +1,10 @@
 package manjeet_hooda.calculator;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.ButtonBarLayout;
+import android.telephony.gsm.GsmCellLocation;
 import android.view.View.OnClickListener;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,15 +21,15 @@ import org.w3c.dom.Text;
 
 import me.grantland.widget.AutofitTextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements buttonListener {
 
     private ViewPager mViewPager;
     private MyPagerAdapter mPagerAdapter;
 
-
-    TextView zero, one, two, three, four, five, six, seven, eight, nine, dot;
-    TextView del, min, plus, div, mul, equals;
     private AutofitTextView result, exp;
+    private Button but_sev, but_four, but_one, but_dot;
+    private Context context;
+
 
     double answer, num1, num2;
     boolean operator_pressed,dot_pressed;
@@ -37,29 +41,88 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        setupPager();
-
-
-
-
-
         result = (AutofitTextView) findViewById(R.id.result);
         exp = (AutofitTextView) findViewById(R.id.exp);
-        result.setText("77777");
-        exp.setText("2398409");
-        answer = num1 = num2 = 0;
-        operator_pressed = equals_pressed = false;
-        dot_pressed = false;
-        answer_found = false;
-        result_string = null;
+        GlobalDataContainer.reset_variables();
+        context = this;
 
+        setupPager();
+        setupButtons();
+    }
+
+    public void updateExpTextView(){
+        exp.setText(GlobalDataContainer.exp_string);
+    }
+
+    public void updateResultTextView(){
+        result.setText(GlobalDataContainer.result_string);
     }
 
     private void setupPager() {
         mViewPager = (ViewPager) findViewById(R.id.ViewPager);
-        mPagerAdapter = new MyPagerAdapter(getSupportFragmentManager(),2);
+        mPagerAdapter = new MyPagerAdapter(getSupportFragmentManager(),2,this);
         mViewPager.setAdapter(mPagerAdapter);
     }
+
+    @Override
+    public void onNumPressed() {
+        updateExpTextView();
+        updateResultTextView();
+    }
+
+    @Override
+    public void onOperandPressed() {
+        updateExpTextView();
+    }
+
+    @Override
+    public void onEqualsPressed() {
+        updateExpTextView();
+    }
+
+    public void setupButtons(){
+        but_sev = (Button)findViewById(R.id.button_seven);
+        but_sev.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GlobalUtils.num_pressed("7");
+                updateExpTextView();
+                updateResultTextView();
+            }
+        });
+
+        but_four = (Button)findViewById(R.id.button_four);
+        but_four.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GlobalUtils.num_pressed("4");
+                updateExpTextView();
+                updateResultTextView();
+            }
+        });
+
+        but_one = (Button)findViewById(R.id.button_one);
+        but_one.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GlobalUtils.num_pressed("1");
+                updateExpTextView();
+                updateResultTextView();
+            }
+        });
+
+        but_dot = (Button)findViewById(R.id.button_dot);
+        but_dot.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GlobalUtils.num_pressed(".");
+                GlobalDataContainer.dot_pressed = true;
+                updateExpTextView();
+                updateResultTextView();
+            }
+        });
+
+    }
+
 
 }
