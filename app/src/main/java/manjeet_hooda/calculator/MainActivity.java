@@ -85,7 +85,8 @@ public class MainActivity extends AppCompatActivity implements buttonListener {
         but_sev.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                GlobalUtils.num_pressed("7");
+                GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + "7";
+                GlobalUtils.evaluate(GlobalDataContainer.exp_string);
                 updateExpTextView();
                 updateResultTextView();
             }
@@ -95,8 +96,8 @@ public class MainActivity extends AppCompatActivity implements buttonListener {
         but_four.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                GlobalUtils.num_pressed("4");
-                updateExpTextView();
+                GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + "4";
+                GlobalUtils.evaluate(GlobalDataContainer.exp_string);updateExpTextView();
                 updateResultTextView();
             }
         });
@@ -105,7 +106,8 @@ public class MainActivity extends AppCompatActivity implements buttonListener {
         but_one.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                GlobalUtils.num_pressed("1");
+                GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + "1";
+                GlobalUtils.evaluate(GlobalDataContainer.exp_string);
                 updateExpTextView();
                 updateResultTextView();
             }
@@ -115,7 +117,6 @@ public class MainActivity extends AppCompatActivity implements buttonListener {
         but_dot.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                GlobalUtils.num_pressed(".");
                 GlobalDataContainer.dot_pressed = true;
                 updateExpTextView();
                 updateResultTextView();

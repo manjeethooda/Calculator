@@ -38,7 +38,8 @@ public class fragment_simple extends Fragment {
         but_eight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GlobalUtils.num_pressed("8");
+                GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + "8";
+                GlobalUtils.evaluate(GlobalDataContainer.exp_string);
                 callbackListener.onNumPressed();
             }
         });
@@ -47,7 +48,8 @@ public class fragment_simple extends Fragment {
         but_five.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GlobalUtils.num_pressed("5");
+                GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + "5";
+                GlobalUtils.evaluate(GlobalDataContainer.exp_string);
                 callbackListener.onNumPressed();
             }
         });
@@ -56,7 +58,8 @@ public class fragment_simple extends Fragment {
         but_two.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GlobalUtils.num_pressed("2");
+                GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + "2";
+                GlobalUtils.evaluate(GlobalDataContainer.exp_string);
                 callbackListener.onNumPressed();
             }
         });
@@ -65,7 +68,8 @@ public class fragment_simple extends Fragment {
         but_zero.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GlobalUtils.num_pressed("0");
+                GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + "0";
+                GlobalUtils.evaluate(GlobalDataContainer.exp_string);
                 callbackListener.onNumPressed();
             }
         });
@@ -76,7 +80,8 @@ public class fragment_simple extends Fragment {
         but_nine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GlobalUtils.num_pressed("9");
+                GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + "9";
+                GlobalUtils.evaluate(GlobalDataContainer.exp_string);
                 callbackListener.onNumPressed();
             }
         });
@@ -85,7 +90,8 @@ public class fragment_simple extends Fragment {
         but_six.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GlobalUtils.num_pressed("6");
+                GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + "6";
+                GlobalUtils.evaluate(GlobalDataContainer.exp_string);
                 callbackListener.onNumPressed();
             }
         });
@@ -94,7 +100,8 @@ public class fragment_simple extends Fragment {
         but_three.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GlobalUtils.num_pressed("3");
+                GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + "3";
+                GlobalUtils.evaluate(GlobalDataContainer.exp_string);
                 callbackListener.onNumPressed();
             }
         });
@@ -153,7 +160,6 @@ public class fragment_simple extends Fragment {
                                         GlobalDataContainer.num2_string.substring(0, GlobalDataContainer.num2_string.length() - 1);
                                 GlobalDataContainer.exp_string =
                                         GlobalDataContainer.exp_string.substring(0, GlobalDataContainer.exp_string.length() - 1);
-                                GlobalUtils.find_answer();
                                 callbackListener.onNumPressed();
                             }
                         }
@@ -166,21 +172,8 @@ public class fragment_simple extends Fragment {
         but_plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!GlobalDataContainer.operand_pressed) {
-                    GlobalDataContainer.operand_pressed = true;
-                    GlobalDataContainer.operand = '+';
-                    GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + "+";
-                    callbackListener.onOperandPressed();
-                }
-                else{
-                    GlobalDataContainer.operand_repressed = true;
-                    if(!GlobalDataContainer.last_char_operand) {
-                        GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + "+";
-                        GlobalDataContainer.operand = '+';
-                        GlobalDataContainer.last_char_operand = true;
-                        callbackListener.onOperandPressed();
-                    }
-                }
+                GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + " + ";
+                callbackListener.onOperandPressed();
             }
         });
 
@@ -188,21 +181,8 @@ public class fragment_simple extends Fragment {
         but_minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!GlobalDataContainer.operand_pressed) {
-                    GlobalDataContainer.operand_pressed = true;
-                    GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + "-";
-                    GlobalDataContainer.operand = '-';
-                    callbackListener.onOperandPressed();
-                }
-                else{
-                    GlobalDataContainer.operand_repressed = true;
-                    if(!GlobalDataContainer.last_char_operand) {
-                        GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + "-";
-                        GlobalDataContainer.operand = '-';
-                        GlobalDataContainer.last_char_operand = true;
-                        callbackListener.onOperandPressed();
-                    }
-                }
+                GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + " - ";
+                callbackListener.onOperandPressed();
             }
         });
 
@@ -210,21 +190,8 @@ public class fragment_simple extends Fragment {
         but_mul.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!GlobalDataContainer.operand_pressed) {
-                    GlobalDataContainer.operand_pressed = true;
-                    GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + "x";
-                    GlobalDataContainer.operand = 'x';
-                    callbackListener.onOperandPressed();
-                }
-                else{
-                    GlobalDataContainer.operand_repressed = true;
-                    if(!GlobalDataContainer.last_char_operand) {
-                        GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + "x";
-                        GlobalDataContainer.operand = 'x';
-                        GlobalDataContainer.last_char_operand = true;
-                        callbackListener.onOperandPressed();
-                    }
-                }
+                GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + " * ";
+                callbackListener.onOperandPressed();
             }
         });
 
@@ -232,21 +199,8 @@ public class fragment_simple extends Fragment {
         but_div.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!GlobalDataContainer.operand_pressed) {
-                    GlobalDataContainer.operand_pressed = true;
-                    GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + "/";
-                    GlobalDataContainer.operand = '/';
-                    callbackListener.onOperandPressed();
-                }
-                else{
-                    GlobalDataContainer.operand_repressed = true;
-                    if(!GlobalDataContainer.last_char_operand) {
-                        GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + "/";
-                        GlobalDataContainer.operand = '/';
-                        GlobalDataContainer.last_char_operand = true;
-                        callbackListener.onOperandPressed();
-                    }
-                }
+                GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + " / ";
+                callbackListener.onOperandPressed();
             }
         });
 
