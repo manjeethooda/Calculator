@@ -1,5 +1,11 @@
 package manjeet_hooda.calculator;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParsePosition;
+import java.util.Locale;
 import java.util.Stack;
 
 /**
@@ -7,11 +13,11 @@ import java.util.Stack;
  */
 public class GlobalUtils {
 
-    public static Double evaluate(String expression) {
+    public static void evaluate(String expression) {
             char[] tokens = expression.toCharArray();
 
             // Stack for numbers: 'values'
-            Stack<Double> values = new Stack<Double>();
+            Stack<BigDecimal> values = new Stack<BigDecimal>();
 
             // Stack for Operators: 'ops'
             Stack<Character> ops = new Stack<Character>();
@@ -28,7 +34,12 @@ public class GlobalUtils {
                     while (i < tokens.length && tokens[i] >= '0' && tokens[i] <= '9'|| i <tokens.length && tokens[i]=='.')
                         sbuf.append(tokens[i++]);
                     try {
-                        values.push(Double.parseDouble(sbuf.toString()));
+                        Locale in_ID = new Locale("en","US");
+                        DecimalFormat nf = (DecimalFormat) NumberFormat.getInstance(in_ID);
+                        nf.setParseBigDecimal(true);
+                        BigDecimal bd = (BigDecimal)nf.parse(sbuf.toString(), new ParsePosition(0));
+
+                        values.push(bd);
                     }catch (NumberFormatException e){
 
                     }
@@ -66,13 +77,11 @@ public class GlobalUtils {
 
             // Top of 'values' contains result, return it
             //return values.pop();
+            MathContext mc = new MathContext(12);
             if(values != null) {
-                if(GlobalDataContainer.dot_pressed)
-                    GlobalDataContainer.result_string = String.valueOf(values.pop());
-                else
-                    GlobalDataContainer.result_string = String.valueOf(values.pop().intValue());
+                BigDecimal bg = new BigDecimal(values.pop().toString(), mc);
+                GlobalDataContainer.result_string = bg.toString();
             }
-            return 0.0;
         }
 
         // Returns true if 'op2' has higher or same precedence as 'op1',
@@ -88,20 +97,20 @@ public class GlobalUtils {
 
         // A utility method to apply an operator 'op' on operands 'a'
         // and 'b'. Return the result.
-        public static Double applyOp(char op, Double b, Double a) {
+        public static BigDecimal applyOp(char op, BigDecimal b, BigDecimal a) {
             switch (op) {
                 case '+':
-                    return a + b;
+                    return a.add(b);
                 case '-':
-                    return a - b;
+                    return a.subtract(b);
                 case '*':
-                    return a * b;
+                    return a.multiply(b);
                 case '/':
-                    if (b == 0)
+                    if (b.compareTo(BigDecimal.ZERO) == 0)
                         throw new
                                 UnsupportedOperationException("Cannot divide by zero");
-                    return a / b;
+                    return a.divide(b);
             }
-            return 0.0;
+            return BigDecimal.ZERO;
         }
 }

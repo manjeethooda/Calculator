@@ -118,7 +118,7 @@ public class fragment_simple extends Fragment {
                 GlobalDataContainer.exp_string = GlobalDataContainer.num1_string;
                 GlobalDataContainer.delete_button_string = "CLR";
                 but_del.setText(GlobalDataContainer.delete_button_string);
-                callbackListener.onEqualsPressed();
+                callbackListener.onNumPressed();
             }
         });
     }
@@ -139,13 +139,16 @@ public class fragment_simple extends Fragment {
                     {
                         GlobalDataContainer.exp_string =
                                         GlobalDataContainer.exp_string.substring(0, GlobalDataContainer.exp_string.length() - 1);
-                        if(GlobalDataContainer.exp_string != null) {
+                        if(GlobalDataContainer.exp_string != null && GlobalDataContainer.exp_string.length()>0) {
                             char lastChar = GlobalDataContainer.exp_string.charAt(GlobalDataContainer.exp_string.length()-1);
                             if(lastChar >= '0' && lastChar <= '9' ) {
                                 GlobalUtils.evaluate(GlobalDataContainer.exp_string);
                                 if(GlobalDataContainer.exp_string.indexOf('.') < 0)
                                     GlobalDataContainer.dot_pressed = false;
                             }
+                        }
+                        else{
+                            GlobalDataContainer.reset_variables();
                         }
                         callbackListener.onNumPressed();
                     }

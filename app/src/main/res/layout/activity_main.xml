@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/exp"
             android:singleLine="true"
+            android:paddingTop="20dp"
             android:paddingRight="20dp"
             android:paddingLeft="20dp"
             android:gravity="right"
@@ -43,11 +44,11 @@
             android:background="@color/white"
             android:textSize="60sp"
             autofit:minTextSize="30sp"
-            android:paddingTop="10dp"
+            android:paddingTop="20dp"
             android:paddingRight="20dp"
             android:paddingLeft="20dp"
             android:gravity="bottom|right"
-            android:paddingBottom="30dp"
+            android:paddingBottom="20dp"
             />
     </LinearLayout>
     <LinearLayout
