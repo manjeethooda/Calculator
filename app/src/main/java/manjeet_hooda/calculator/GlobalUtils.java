@@ -2,6 +2,7 @@ package manjeet_hooda.calculator;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParsePosition;
@@ -109,7 +110,11 @@ public class GlobalUtils {
                     if (b.compareTo(BigDecimal.ZERO) == 0)
                         throw new
                                 UnsupportedOperationException("Cannot divide by zero");
-                    return a.divide(b);
+                    try{
+                        return a.divide(b,128, RoundingMode.HALF_UP);
+                    }catch (ArithmeticException e){
+
+                    }
             }
             return BigDecimal.ZERO;
         }
