@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import javax.microedition.khronos.opengles.GL;
+
 public class fragment_simple extends Fragment {
 
     private View view;
@@ -133,36 +135,19 @@ public class fragment_simple extends Fragment {
                     callbackListener.onNumPressed();
                 }
                 else{
-                    if(!GlobalDataContainer.operand_pressed){
-                        if(GlobalDataContainer.num1_string.length()>0)
-                        {
-                            GlobalDataContainer.num1_string =
-                                    GlobalDataContainer.num1_string.substring(0,GlobalDataContainer.num1_string.length()-1);
-                            GlobalDataContainer.exp_string =
-                                    GlobalDataContainer.exp_string.substring(0,GlobalDataContainer.exp_string.length()-1);
-                            callbackListener.onEqualsPressed();
-                        }
-
-                    }
-                    else{
-                        if(GlobalDataContainer.last_char_operand){
-                            if(GlobalDataContainer.exp_string.length()>0) {
-                                GlobalDataContainer.exp_string =
+                    if(GlobalDataContainer.exp_string!= null && GlobalDataContainer.exp_string.length() >0 )
+                    {
+                        GlobalDataContainer.exp_string =
                                         GlobalDataContainer.exp_string.substring(0, GlobalDataContainer.exp_string.length() - 1);
-                                callbackListener.onEqualsPressed();
+                        if(GlobalDataContainer.exp_string != null) {
+                            char lastChar = GlobalDataContainer.exp_string.charAt(GlobalDataContainer.exp_string.length()-1);
+                            if(lastChar >= '0' && lastChar <= '9' ) {
+                                GlobalUtils.evaluate(GlobalDataContainer.exp_string);
+                                if(GlobalDataContainer.exp_string.indexOf('.') < 0)
+                                    GlobalDataContainer.dot_pressed = false;
                             }
                         }
-                        else
-                        {
-                            if(GlobalDataContainer.num2_string.length()>0)
-                            {
-                                GlobalDataContainer.num2_string =
-                                        GlobalDataContainer.num2_string.substring(0, GlobalDataContainer.num2_string.length() - 1);
-                                GlobalDataContainer.exp_string =
-                                        GlobalDataContainer.exp_string.substring(0, GlobalDataContainer.exp_string.length() - 1);
-                                callbackListener.onNumPressed();
-                            }
-                        }
+                        callbackListener.onNumPressed();
                     }
                 }
             }

@@ -117,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements buttonListener {
         but_dot.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + ".";
                 GlobalDataContainer.dot_pressed = true;
                 updateExpTextView();
                 updateResultTextView();

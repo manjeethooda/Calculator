@@ -7,11 +7,11 @@ import java.util.Stack;
  */
 public class GlobalUtils {
 
-    public static int evaluate(String expression) {
+    public static Double evaluate(String expression) {
             char[] tokens = expression.toCharArray();
 
             // Stack for numbers: 'values'
-            Stack<Integer> values = new Stack<Integer>();
+            Stack<Double> values = new Stack<Double>();
 
             // Stack for Operators: 'ops'
             Stack<Character> ops = new Stack<Character>();
@@ -22,12 +22,16 @@ public class GlobalUtils {
                     continue;
 
                 // Current token is a number, push it to stack for numbers
-                if (tokens[i] >= '0' && tokens[i] <= '9') {
+                if (tokens[i] >= '0' && tokens[i] <= '9' || tokens[i] == '.') {
                     StringBuffer sbuf = new StringBuffer();
                     // There may be more than one digits in number
-                    while (i < tokens.length && tokens[i] >= '0' && tokens[i] <= '9')
+                    while (i < tokens.length && tokens[i] >= '0' && tokens[i] <= '9'|| i <tokens.length && tokens[i]=='.')
                         sbuf.append(tokens[i++]);
-                    values.push(Integer.parseInt(sbuf.toString()));
+                    try {
+                        values.push(Double.parseDouble(sbuf.toString()));
+                    }catch (NumberFormatException e){
+
+                    }
                 }
 
                 // Current token is an opening brace, push it to 'ops'
@@ -63,10 +67,12 @@ public class GlobalUtils {
             // Top of 'values' contains result, return it
             //return values.pop();
             if(values != null) {
-                GlobalDataContainer.result_string = String.valueOf(values.pop());
-                return 0;
+                if(GlobalDataContainer.dot_pressed)
+                    GlobalDataContainer.result_string = String.valueOf(values.pop());
+                else
+                    GlobalDataContainer.result_string = String.valueOf(values.pop().intValue());
             }
-            return 0;
+            return 0.0;
         }
 
         // Returns true if 'op2' has higher or same precedence as 'op1',
@@ -82,7 +88,7 @@ public class GlobalUtils {
 
         // A utility method to apply an operator 'op' on operands 'a'
         // and 'b'. Return the result.
-        public static int applyOp(char op, int b, int a) {
+        public static Double applyOp(char op, Double b, Double a) {
             switch (op) {
                 case '+':
                     return a + b;
@@ -96,6 +102,6 @@ public class GlobalUtils {
                                 UnsupportedOperationException("Cannot divide by zero");
                     return a / b;
             }
-            return 0;
+            return 0.0;
         }
 }
