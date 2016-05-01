@@ -6,6 +6,7 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParsePosition;
+import java.util.EmptyStackException;
 import java.util.Locale;
 import java.util.Stack;
 
@@ -14,7 +15,13 @@ import java.util.Stack;
  */
 public class GlobalUtils {
 
+    public static void evaluate_exp(String num){
+        GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + num;
+    }
+
     public static void evaluate(String expression) {
+            if(GlobalDataContainer.op_brac_pressed)
+                expression = expression + " ) ";
             char[] tokens = expression.toCharArray();
 
             // Stack for numbers: 'values'
@@ -73,15 +80,23 @@ public class GlobalUtils {
 
             // Entire expression has been parsed at this point, apply remaining
             // ops to remaining values
-            while (!ops.empty())
-                values.push(applyOp(ops.pop(), values.pop(), values.pop()));
+            while (!ops.empty()){
+                try{
+                    values.push(applyOp(ops.pop(), values.pop(), values.pop()));
+                }catch (EmptyStackException e){
 
+                }
+            }
             // Top of 'values' contains result, return it
             //return values.pop();
             MathContext mc = new MathContext(12);
-            if(values != null) {
-                BigDecimal bg = new BigDecimal(values.pop().toString(), mc);
-                GlobalDataContainer.result_string = bg.toString();
+            if(values != null && !values.isEmpty()) {
+                try {
+                    BigDecimal bg = new BigDecimal(values.pop().toString(), mc);
+                    GlobalDataContainer.result_string = bg.toString();
+                }catch (EmptyStackException e){
+
+                }
             }
         }
 

@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import javax.microedition.khronos.opengles.GL;
 
@@ -40,7 +41,7 @@ public class fragment_simple extends Fragment {
         but_eight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + "8";
+                GlobalUtils.evaluate_exp("8");
                 GlobalUtils.evaluate(GlobalDataContainer.exp_string);
                 callbackListener.onNumPressed();
             }
@@ -50,7 +51,7 @@ public class fragment_simple extends Fragment {
         but_five.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + "5";
+                GlobalUtils.evaluate_exp("5");
                 GlobalUtils.evaluate(GlobalDataContainer.exp_string);
                 callbackListener.onNumPressed();
             }
@@ -60,7 +61,7 @@ public class fragment_simple extends Fragment {
         but_two.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + "2";
+                GlobalUtils.evaluate_exp("2");
                 GlobalUtils.evaluate(GlobalDataContainer.exp_string);
                 callbackListener.onNumPressed();
             }
@@ -70,7 +71,7 @@ public class fragment_simple extends Fragment {
         but_zero.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + "0";
+                GlobalUtils.evaluate_exp("0");
                 GlobalUtils.evaluate(GlobalDataContainer.exp_string);
                 callbackListener.onNumPressed();
             }
@@ -82,7 +83,7 @@ public class fragment_simple extends Fragment {
         but_nine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + "9";
+                GlobalUtils.evaluate_exp("9");
                 GlobalUtils.evaluate(GlobalDataContainer.exp_string);
                 callbackListener.onNumPressed();
             }
@@ -92,7 +93,7 @@ public class fragment_simple extends Fragment {
         but_six.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + "6";
+                GlobalUtils.evaluate_exp("6");
                 GlobalUtils.evaluate(GlobalDataContainer.exp_string);
                 callbackListener.onNumPressed();
             }
@@ -102,7 +103,7 @@ public class fragment_simple extends Fragment {
         but_three.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + "3";
+                GlobalUtils.evaluate_exp("3");
                 GlobalUtils.evaluate(GlobalDataContainer.exp_string);
                 callbackListener.onNumPressed();
             }
@@ -119,6 +120,7 @@ public class fragment_simple extends Fragment {
                 GlobalDataContainer.delete_button_string = "CLR";
                 but_del.setText(GlobalDataContainer.delete_button_string);
                 callbackListener.onNumPressed();
+                GlobalDataContainer.result_string = GlobalDataContainer.exp_string;
             }
         });
     }
@@ -128,39 +130,39 @@ public class fragment_simple extends Fragment {
         but_del.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(GlobalDataContainer.delete_button_string.equals("CLR")){
+                if (GlobalDataContainer.delete_button_string.equals("CLR")) {
                     GlobalDataContainer.reset_variables();
                     GlobalDataContainer.delete_button_string = "DEL";
                     but_del.setText(GlobalDataContainer.delete_button_string);
                     callbackListener.onNumPressed();
-                }
-                else{
+                } else
+                {
                     if(GlobalDataContainer.exp_string!= null && GlobalDataContainer.exp_string.length() >0 )
                     {
+                        char lastChar = GlobalDataContainer.exp_string.charAt(GlobalDataContainer.exp_string.length()-1);
+                        if(lastChar == ')')
+                            GlobalDataContainer.op_brac_pressed = true;
+                        if(lastChar == '(')
+                            GlobalDataContainer.op_brac_pressed = false;
                         GlobalDataContainer.exp_string =
-                                        GlobalDataContainer.exp_string.substring(0, GlobalDataContainer.exp_string.length() - 1);
+                            GlobalDataContainer.exp_string.substring(0, GlobalDataContainer.exp_string.length() - 1);
                         if(GlobalDataContainer.exp_string != null && GlobalDataContainer.exp_string.length()>0) {
-                            char lastChar = GlobalDataContainer.exp_string.charAt(GlobalDataContainer.exp_string.length()-1);
-                            if(lastChar >= '0' && lastChar <= '9' ) {
-                                GlobalUtils.evaluate(GlobalDataContainer.exp_string);
-                                if(GlobalDataContainer.exp_string.indexOf('.') < 0)
-                                    GlobalDataContainer.dot_pressed = false;
-                            }
-                        }
-                        else{
-                            GlobalDataContainer.reset_variables();
-                        }
-                        callbackListener.onNumPressed();
+                            GlobalUtils.evaluate(GlobalDataContainer.exp_string);
                     }
+                    else{
+                        GlobalDataContainer.reset_variables();
+                    }
+                    callbackListener.onNumPressed();
                 }
             }
-        });
+        }
+    });
 
         but_plus = (Button)view.findViewById(R.id.button_plus);
         but_plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + " + ";
+                GlobalUtils.evaluate_exp(" + ");
                 callbackListener.onOperandPressed();
             }
         });
@@ -169,7 +171,7 @@ public class fragment_simple extends Fragment {
         but_minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + " - ";
+                GlobalUtils.evaluate_exp(" - ");
                 callbackListener.onOperandPressed();
             }
         });
@@ -178,7 +180,7 @@ public class fragment_simple extends Fragment {
         but_mul.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + " * ";
+                GlobalUtils.evaluate_exp(" * ");
                 callbackListener.onOperandPressed();
             }
         });
@@ -187,7 +189,7 @@ public class fragment_simple extends Fragment {
         but_div.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GlobalDataContainer.exp_string = GlobalDataContainer.exp_string + " / ";
+                GlobalUtils.evaluate_exp(" / ");
                 callbackListener.onOperandPressed();
             }
         });

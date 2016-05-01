@@ -38,6 +38,7 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter {
                 if (mFragment_scientific == null) {
                     mFragment_scientific = new fragment_scientific();
                 }
+                mFragment_scientific.setupListener(mainActivity);
                 return mFragment_scientific;
             default:
                 return null;

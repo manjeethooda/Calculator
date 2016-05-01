@@ -12,6 +12,9 @@ public class GlobalDataContainer {
     public static char operand;
     public static boolean last_char_operand;
     public static String delete_button_string = "DEL";
+    public static String exp2_string;
+    public static boolean op_brac_pressed;
+    public static boolean op_brac_opening;
 
     public static String result_string = "";
     public static String exp_string="";
@@ -31,9 +34,12 @@ public class GlobalDataContainer {
         equals_pressed = false;
         operand_pressed = false;
         operand_repressed = false;
+        op_brac_pressed = false;
+        op_brac_opening = false;
 
         result_string = "";
         exp_string="";
+        exp2_string="";
         num1_string="";
         num2_string="";
 
